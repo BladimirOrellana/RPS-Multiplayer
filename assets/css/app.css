@@ -2,3 +2,199 @@
     margin: 0;
     padding: 0;
 }
+
+body{
+    box-sizing: border-box;
+
+}
+
+.main-container{
+    background:red;
+    height: 100vh;
+    position: relative;
+}
+.welcome-screen{
+
+
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 80%;
+height: 200px;
+position: relative;
+text-align: center;
+
+}
+.welcome-screen-title{
+    color: aliceblue;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+#startButton{
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+    outline: none;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    border-radius: 100px;
+   
+ 
+ 
+      
+}
+#startButton:hover{
+    transform: translateY(-3px);
+    box-shadow: 10px 10px 10px black;
+    
+}
+.game-screen{
+    display: none;
+}
+.categories-container{
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+}
+.categories-container::after{
+    display: block;
+    content: "";
+    clear: both;
+}
+.category{
+    width: 40%;
+    padding: 30px;
+   background: black;
+    margin: 5px;
+    color: whitesmoke;
+    text-align: center;
+
+}
+
+.category-1{
+    float: left;
+}
+.category-2{
+    float: right;
+}
+.nav{
+    background: black;
+    color: white;
+    padding: 5px;
+    position: relative;
+    height: 40px;
+}
+
+.turns{
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 5px;
+    text-align: center;
+    margin: 10px;
+}
+.message{
+    width: 80%;
+    margin: 0 auto;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
+.choosed{
+   float: left;
+    padding: 20px;
+}
+.game-options{
+    width: 20%;
+   padding: 30px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 5px;
+}
+.rock{
+     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+
+}
+.paper{
+   position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+
+}
+.scissors{
+   position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+
+}
+.players{
+    width: 29%;
+   background: yellow;
+    margin: 10px;
+    float: left;
+    text-align: center;
+    padding: 10px;
+}
+
+
+
+
+/*----------TABLETS----*/
+@media screen and (max-width: 1160px){
+   .category{
+        width: 100%;
+        padding: 0;
+        padding-bottom: 30px;
+        padding-top: 30px;
+       background: black;
+       margin-top: 5px;
+       margin-right: 0;
+       margin-left: 0;
+       margin-bottom: 5px;
+        color: whitesmoke;
+       float: none;
+    }
+    
+   
+    .game-container{
+        width: 100%;
+        padding: 0;
+     
+      
+    }
+    .game-options{
+        width: 80%;
+        padding: 15px;
+        margin: 0 auto;
+        margin-bottom: 5px;
+       text-align: center;
+        font-size: 50px;
+    }
+    .players{
+        width: 80%;
+        height: 150px;
+        background: yellow;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+       
+        
+        float: none;
+        text-align: center;
+        padding: 0;
+    }
+    
+    
+}
