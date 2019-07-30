@@ -3,6 +3,23 @@ $(document).ready(function(){
     var connedtedNow;
     var dataBase ;
     var  animationDelay;
+    var youCounter = 0
+    var robotinCounter = 0;
+    var initialCount = 0;
+    var turns = $("<p>");
+    var gameScreenWrapper = $("<div>");
+    var nav = $("<nav>");
+    var message = $("<div>");
+    var messageUl = $("<ul>");
+    var messageUlList1 = $("<li>");
+    var messageUlList2 = $("<li>");
+    var messageUlList3 = $("<li>");
+    var scissors = $("<di>");
+var paper = $("<di>");
+var rock = $("<di>");
+var randomIcons = $("<div>");
+
+    
     var machineGame = ['rock','paper','scissors'];
     var machineGameRandom = machineGame[ Math.floor(Math.random() * machineGame.length)];
     
@@ -99,69 +116,28 @@ multiPlayer();
 })
 
 }
+
 //SINGLE PLAYER FUNCTION
 function singlePlayer(){
 $("#singlePlayer").on('click', function(){
    animationDelay = setTimeout(function(){
-       var message = $("<div>");
-       message.addClass("message");
-      
-
-var nav = $("<nav>");
-var turns = $("<p>");
-turns.addClass("turns");
-turns.html("Choose Your Game")
-nav.append(turns);
-nav.addClass("nav");
-var rock = $("<di>");
-rock.addClass("rock game-options");
-rock.html('<i class="fas fa-hand-rock"></i>')
-rock.attr('data-name','rock');
-
-var paper = $("<di>");
-paper.addClass("paper game-options");
-paper.html('<i class="fas fa-hand-paper"></i>');
-paper.attr('data-name','paper');
-var scissors = $("<di>");
-scissors.addClass("scissors game-options");
-scissors.html('<i class="fas fa-hand-scissors"></i>');
-scissors.attr('data-name','scissors');
+  gameElements();
 
 animationDelay = setTimeout(function(){
-    $(".main-container").append(nav,message,rock, paper, scissors);
+    gameScreenWrapper.append(nav,message,rock, paper, scissors,randomIcons);
+    $(".main-container").append(gameScreenWrapper);
+    
     $(".game-options").on('click', function(){
-        turns.html("Waitting...")
     if( $(this).attr('data-name') === "rock"){
-       
-      message.html('You Choosed: <i class="fas fa-hand-rock"></i>')
-      paper.fadeOut();
-      scissors.fadeOut();
-      animationDelay = setTimeout(function(){
-        if(machineGameRandom === "rock"){
-            turns.html("Machine Chossed " + machineGameRandom + " is a tie");
-        }else if (machineGameRandom === "paper"){
-            turns.html("Machine Chossed " + machineGameRandom + " You lost");
-        }else{
-            turns.html("Machine Chossed " + machineGameRandom + " You win");
-        }
-       animationDelay = setTimeout(function(){
-        machineGameRandom = machineGame[ Math.floor(Math.random() * machineGame.length)];
-        turns.html("Play Again");
-        paper.fadeIn();
-        scissors.fadeIn();
-       },2000)
-      },3000);
       
+        rockFunction();
+
     }else if( $(this).attr('data-name') === "paper"){
-        message.html('You Choosed: <i class="fas fa-hand-paper"></i>')
-        rock.fadeOut();
-        scissors.fadeOut();
+        paperFunction();
     }else if( $(this).attr('data-name') === "scissors"){
-        message.html('You Choosed: <i class="fas fa-hand-scissors"></i>')
-        paper.fadeOut();
-        rock.fadeOut();
+        scissorsFunction();
     }
-       
+    
    
     })
 }, 200)
@@ -170,6 +146,57 @@ animationDelay = setTimeout(function(){
 $(".categories-container").fadeOut();
        },500);
 })
+
+}
+//RESET FUNCTION
+function reset(){
+    if(youCounter == 3){
+
+    alert("game over You win")
+   turns.html("You win");
+   
+  
+     }else if(robotinCounter === 3){
+        turns.html("You Lost");
+        turns.html("You Lost");
+        
+
+       
+     }
+}
+
+function gameElements(){
+    
+    gameScreenWrapper.addClass("game-screen-wrapper");
+    message.addClass("message");
+    messageUlList1.addClass("ul-list");
+    messageUlList2.addClass("ul-list wating");
+    messageUlList3.addClass("ul-list");
+   messageUl.append(messageUlList1,messageUlList2,messageUlList3);
+   
+   
+
+
+
+turns.addClass("turns");
+turns.html("You Start")
+nav.append(turns);
+nav.addClass("nav");
+
+randomIcons.addClass("random-icons");
+
+rock.addClass("rock game-options");
+rock.html('<i class="fas fa-hand-rock"></i>')
+rock.attr('data-name','rock');
+
+
+paper.addClass("paper game-options");
+paper.html('<i class="fas fa-hand-paper"></i>');
+paper.attr('data-name','paper');
+
+scissors.addClass("scissors game-options");
+scissors.html('<i class="fas fa-hand-scissors"></i>');
+scissors.attr('data-name','scissors');
 }
 //MULTI PLAYER FUNCTION
 function multiPlayer(){
@@ -187,7 +214,171 @@ startScreen();
 
 
 
+function rockFunction(){
+    intervalTime = setInterval(function(){
+        var iconesArray = ['<i class="fas fa-hand-rock"></i>','<i class="fas fa-hand-paper"></i>','<i class="fas fa-hand-scissors"></i>']
+     var iconesRandomArray = iconesArray[ Math.floor(Math.random() * iconesArray.length)];
+     randomIcons.html(iconesRandomArray);
+    
+    },200)
+     turns.html("waitting...");
+    
+    
+     reset();
+     rock.fadeOut();
+ paper.fadeOut();
+   scissors.fadeOut();
+   randomIcons.fadeIn();
+   
+   animationDelay = setTimeout(function(){
+     message.append(messageUl);
+     if(machineGameRandom === "rock"){
+        clearInterval(intervalTime);
+         turns.html("Robotin Chossed " + machineGameRandom + " is a tie");
+         messageUlList1.html('You: ' + youCounter)
+         messageUlList2.html("vs")
+        messageUlList3.html('Robotin ' + robotinCounter)
+}else if (machineGameRandom === "paper"){
+        turns.html("Robotin Chossed " + machineGameRandom + " You lost");
+        robotinCounter++;
+        clearInterval(intervalTime);
+        messageUlList1.html('You: ' + youCounter)
+        messageUlList2.html("vs")
+       messageUlList3.html('Robotin ' + robotinCounter)
+      
+     }else{
+        turns.html("Robotin Chossed " + machineGameRandom + " You win");
+        youCounter++;
+        clearInterval(intervalTime);
+        reset()
+       messageUlList1.html('You: ' + youCounter)
+        messageUlList2.html("vs")
+       messageUlList3.html('Robotin ' + robotinCounter)
+      
+     }
+  
+     
+    animationDelay = setTimeout(function(){
+     machineGameRandom = machineGame[ Math.floor(Math.random() * machineGame.length)];
+     randomIcons.fadeOut();
+     rock.fadeIn();
+     paper.fadeIn();
+     scissors.fadeIn();
+    },2000)
+    
+   },3000);
+}
 
+function paperFunction(){
+    intervalTime = setInterval(function(){
+        var iconesArray = ['<i class="fas fa-hand-rock"></i>','<i class="fas fa-hand-paper"></i>','<i class="fas fa-hand-scissors"></i>']
+     var iconesRandomArray = iconesArray[ Math.floor(Math.random() * iconesArray.length)];
+     randomIcons.html(iconesRandomArray);
+    
+    },200)
+     turns.html("waitting...");
+    
+    
+     reset();
+     rock.fadeOut();
+ paper.fadeOut();
+   scissors.fadeOut();
+   randomIcons.fadeIn();
+   
+   animationDelay = setTimeout(function(){
+     message.append(messageUl);
+     if(machineGameRandom === "rock"){
+        clearInterval(intervalTime);
+         turns.html("Robotin Chossed " + machineGameRandom + " You win");
+         youCounter++;
+         messageUlList1.html('You: ' + youCounter)
+         messageUlList2.html("vs")
+        messageUlList3.html('Robotin ' + robotinCounter)
+}else if (machineGameRandom === "paper"){
+        turns.html("Robotin Chossed " + machineGameRandom + " is a tie");
+        clearInterval(intervalTime);
+        messageUlList1.html('You: ' + youCounter)
+        messageUlList2.html("vs")
+       messageUlList3.html('Robotin ' + robotinCounter)
+      
+     }else{
+        turns.html("Robotin Chossed " + machineGameRandom + " you lost");
+       
+        robotinCounter++;
+        clearInterval(intervalTime);
+        reset()
+       messageUlList1.html('You: ' + youCounter)
+        messageUlList2.html("vs")
+       messageUlList3.html('Robotin ' + robotinCounter)
+      
+     }
+  
+     
+    animationDelay = setTimeout(function(){
+     machineGameRandom = machineGame[ Math.floor(Math.random() * machineGame.length)];
+     randomIcons.fadeOut();
+     rock.fadeIn();
+     paper.fadeIn();
+     scissors.fadeIn();
+    },2000)
+    
+   },3000);
+}
+
+function scissorsFunction(){
+    intervalTime = setInterval(function(){
+        var iconesArray = ['<i class="fas fa-hand-rock"></i>','<i class="fas fa-hand-paper"></i>','<i class="fas fa-hand-scissors"></i>']
+     var iconesRandomArray = iconesArray[ Math.floor(Math.random() * iconesArray.length)];
+     randomIcons.html(iconesRandomArray);
+    
+    },200)
+     turns.html("waitting...");
+    
+    
+     reset();
+     rock.fadeOut();
+ paper.fadeOut();
+   scissors.fadeOut();
+   randomIcons.fadeIn();
+   
+   animationDelay = setTimeout(function(){
+     message.append(messageUl);
+     if(machineGameRandom === "rock"){
+        clearInterval(intervalTime);
+         turns.html("Robotin Chossed " + machineGameRandom + " You lost");
+         robotinCounter++;
+         messageUlList1.html('You: ' + youCounter)
+         messageUlList2.html("vs")
+        messageUlList3.html('Robotin ' + robotinCounter)
+}else if (machineGameRandom === "paper"){
+        turns.html("Robotin Chossed " + machineGameRandom + " you win");
+        youCounter++;
+       clearInterval(intervalTime);
+        messageUlList1.html('You: ' + youCounter)
+        messageUlList2.html("vs")
+       messageUlList3.html('Robotin ' + robotinCounter)
+      
+     }else{
+        turns.html("Robotin Chossed " + machineGameRandom + " is a tie");
+        clearInterval(intervalTime);
+        reset()
+       messageUlList1.html('You: ' + youCounter)
+        messageUlList2.html("vs")
+       messageUlList3.html('Robotin ' + robotinCounter)
+      
+     }
+  
+     
+    animationDelay = setTimeout(function(){
+     machineGameRandom = machineGame[ Math.floor(Math.random() * machineGame.length)];
+     randomIcons.fadeOut();
+     rock.fadeIn();
+     paper.fadeIn();
+     scissors.fadeIn();
+    },2000)
+    
+   },3000);
+}
 
 
 })

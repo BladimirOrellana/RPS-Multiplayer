@@ -95,7 +95,7 @@ text-align: center;
     margin: 0 auto;
     padding: 5px;
     text-align: center;
-    margin: 10px;
+  
 }
 .message{
     width: 80%;
@@ -108,6 +108,17 @@ text-align: center;
 .choosed{
    float: left;
     padding: 20px;
+}
+.ul-list{
+    list-style: none;
+    float: left;
+    padding: 20px;
+    margin-left: 10px;
+    width: 28%;
+ 
+}
+.wating{
+    text-align: center;
 }
 .game-options{
     width: 20%;
@@ -139,6 +150,17 @@ text-align: center;
     transform: translate(-50%, -90%);
 
 }
+.random-icons{
+     width: 100px;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 20px;
+    font-size: 100px;
+}
 .players{
     width: 29%;
    background: yellow;
@@ -147,6 +169,7 @@ text-align: center;
     text-align: center;
     padding: 10px;
 }
+
 
 
 
@@ -195,6 +218,94 @@ text-align: center;
         text-align: center;
         padding: 0;
     }
+    .message{
+        width: 80%;
+        margin: 0 auto;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -20%);
+    }
+    .choosed{
+       float: left;
+        padding: 20px;
+    }
+    .ul-list{
+        list-style: none;
+        float: left;
+        padding: 20px;
+        margin-left: 10px;
+        width: 17%;
+        height: 100px;
     
+    }
     
 }
+
+
+/*----------TABLETS----*/
+@media screen and (max-width: 400px){
+    .category{
+         width: 100%;
+         padding: 0;
+         padding-bottom: 30px;
+         padding-top: 30px;
+        background: black;
+        margin-top: 5px;
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: 5px;
+         color: whitesmoke;
+        float: none;
+     }
+     
+    
+     .game-container{
+         width: 100%;
+         padding: 0;
+      
+       
+     }
+     .game-options{
+         width: 80%;
+         padding: 15px;
+         margin: 0 auto;
+         margin-bottom: 5px;
+        text-align: center;
+         font-size: 50px;
+     }
+     .players{
+         width: 80%;
+         height: 150px;
+         background: yellow;
+         margin: 0 auto;
+         margin-top: 10px;
+         margin-bottom: 10px;
+        
+         
+         float: none;
+         text-align: center;
+         padding: 0;
+     }
+     .message{
+         width: 80%;
+         margin: 0 auto;
+         position: absolute;
+         top: 20%;
+         left: 50%;
+         transform: translate(-50%, -20%);
+     }
+     .choosed{
+        float: left;
+         padding: 20px;
+     }
+     .ul-list{
+         list-style: none;
+         float: left;
+         padding: 20px;
+         margin-left: 10px;
+         width: 13%;
+         height: 100px;
+      }
+     
+ }
