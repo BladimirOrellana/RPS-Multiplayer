@@ -171,7 +171,11 @@ text-align: center;
 }
 
 
-
+.game-over{
+    color: aqua;
+    background: yellowgreen;
+    text-align: center;
+}
 
 
 /*----------TABLETS----*/

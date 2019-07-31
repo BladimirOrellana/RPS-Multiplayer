@@ -18,6 +18,8 @@ $(document).ready(function(){
 var paper = $("<di>");
 var rock = $("<di>");
 var randomIcons = $("<div>");
+var gameOverMessage = $("<h1>");
+gameOverMessage.addClass("game-over");
 
     //RESET FUNCTION
 
@@ -382,18 +384,20 @@ function scissorsFunction(){
 }
 
 function reset(){
-   //GAME OVER===========================
-   if(youCounter === 2){
+   //RESET FUNTION===========================
+   if(youCounter === 3){
     youCounter = 0;
     robotinCounter =0;
-    gameScreenWrapper.html('');
-     $(".welcome-screen").show();
-  }else if(robotinCounter === 2){
+   gameOverMessage.html("GAME OVER!")
+    gameScreenWrapper.append(gameOverMessage);
+   
+  }else if(robotinCounter === 3){
     youCounter =0;
     robotinCounter =0;
     gameScreenWrapper.html('');
-
-    $(".welcome-screen").show();
+    gameOverMessage.html("GAME OVER!")
+    gameScreenWrapper.append(gameOverMessage);
+    
   }
 }
 })
