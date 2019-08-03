@@ -10,6 +10,7 @@ $(document).ready(function(){
     var gameScreenWrapper = $("<div>");
     var nav = $("<nav>");
     var message = $("<div>");
+    var gameHappening = $("<div>");
     var messageUl = $("<ul>");
     var messageUlList1 = $("<li>");
     var messageUlList2 = $("<li>");
@@ -21,7 +22,8 @@ var randomIcons = $("<div>");
 var gameOverMessage = $("<h1>");
 gameOverMessage.addClass("game-over");
 
-    //RESET FUNCTION
+
+    //again FUNCTION
 
     var machineGame = ['rock','paper','scissors'];
     var machineGameRandom = machineGame[ Math.floor(Math.random() * machineGame.length)];
@@ -124,36 +126,8 @@ multiPlayer();
 function singlePlayer(){
   gameScreenWrapper.show();
 $("#singlePlayer").on('click', function(){
-   animationDelay = setTimeout(function(){
-  gameElements();
-
-animationDelay = setTimeout(function(){
-    gameScreenWrapper.append(nav,message,rock, paper, scissors,randomIcons);
-    $(".main-container").append(gameScreenWrapper);
-    
-    $(".game-options").on('click', function(){
-      
-    if( $(this).attr('data-name') === "rock"){
-      
- rockFunction();
-
-    }else if( $(this).attr('data-name') === "paper"){
-        paperFunction();
-       
-    }else if( $(this).attr('data-name') === "scissors"){
-        scissorsFunction();
-        
-       
-    }
-    
-  
-    })
-   
-}, 200)
-
-
-$(".categories-container").fadeOut();
-       },500);
+ 
+  gameAction();
 })
 
 }
@@ -195,11 +169,26 @@ scissors.attr('data-name','scissors');
 //MULTI PLAYER FUNCTION
 function multiPlayer(){
     $("#multiPlayer").on('click', function(){
-       animationDelay = setTimeout(function(){
-
+      if (connedtedNow === 1){
+        var Warning = $("<button>");
+        var playersConnected = $("<P>")
+        playersConnected.addClass("players-connected");
+        playersConnected.html("Players Online" + connedtedNow);
+        Warning.addClass("warning-button");
+        Warning.html("Please Invite a friend!");
         $(".categories-container").fadeOut();
+        message.append(Warning,playersConnected);
+        $(".main-container").prepend(message);
+        $(".warning-button").on('click', function(){
+
+console.log("J")
+        })
+    
+      }else if (connedtedNow >= 2){
        
-       },500);
+        gameAction();
+      }
+    
     })
     }
 checkConnection();
@@ -241,7 +230,7 @@ function rockFunction(){
         messageUlList1.html('You: ' + youCounter)
         messageUlList2.html("vs")
        messageUlList3.html('Robotin ' + robotinCounter)
-       reset();
+       again();
       
      }else{
         turns.html("Robotin Chossed " + machineGameRandom + " You win");
@@ -250,7 +239,7 @@ function rockFunction(){
       messageUlList1.html('You: ' + youCounter)
         messageUlList2.html("vs")
        messageUlList3.html('Robotin ' + robotinCounter)
-       reset();
+       again();
       
       
      }
@@ -292,7 +281,7 @@ function paperFunction(){
          messageUlList1.html('You: ' + youCounter)
          messageUlList2.html("vs")
         messageUlList3.html('Robotin ' + robotinCounter)
-        reset();
+        again();
 }else if (machineGameRandom === "paper"){
         turns.html("Robotin Chossed " + machineGameRandom + " is a tie");
         clearInterval(intervalTime);
@@ -310,7 +299,7 @@ function paperFunction(){
        messageUlList1.html('You: ' + youCounter)
         messageUlList2.html("vs")
        messageUlList3.html('Robotin ' + robotinCounter)
-       reset();
+       again();
       
      }
   
@@ -351,7 +340,7 @@ function scissorsFunction(){
          messageUlList1.html('You: ' + youCounter)
          messageUlList2.html("vs")
         messageUlList3.html('Robotin ' + robotinCounter)
-        reset();
+        again();
 }else if (machineGameRandom === "paper"){
         turns.html("Robotin Chossed " + machineGameRandom + " you win");
         youCounter++;
@@ -359,7 +348,7 @@ function scissorsFunction(){
         messageUlList1.html('You: ' + youCounter)
         messageUlList2.html("vs")
        messageUlList3.html('Robotin ' + robotinCounter)
-       reset();
+       again();
       
      }else{
         turns.html("Robotin Chossed " + machineGameRandom + " is a tie");
@@ -383,22 +372,64 @@ function scissorsFunction(){
    },3000);
 }
 
-function reset(){
-   //RESET FUNTION===========================
-   if(youCounter === 3){
-    youCounter = 0;
-    robotinCounter =0;
-   gameOverMessage.html("GAME OVER!")
-    gameScreenWrapper.append(gameOverMessage);
-   
-  }else if(robotinCounter === 3){
-    youCounter =0;
-    robotinCounter =0;
-    gameScreenWrapper.html('');
-    gameOverMessage.html("GAME OVER!")
-    gameScreenWrapper.append(gameOverMessage);
+//GAME ACTION FUNCTION
+function gameAction(){
+  animationDelay = setTimeout(function(){
+    gameElements();
+  
+  animationDelay = setTimeout(function(){
+    gameHappening.append(nav,message,rock, paper, scissors,randomIcons);
+      gameScreenWrapper.append(gameHappening);
+      $(".main-container").append(gameScreenWrapper);
+      
+      $(".game-options").on('click', function(){
+        
+      if( $(this).attr('data-name') === "rock"){
+        
+   rockFunction();
+  
+      }else if( $(this).attr('data-name') === "paper"){
+          paperFunction();
+         
+      }else if( $(this).attr('data-name') === "scissors"){
+          scissorsFunction();
+          
+         
+      }
+      
     
+      })
+     
+  }, 200)
+  
+  
+  $(".categories-container").fadeOut();
+         },500);
+}
+
+function again(){
+  
+   //again FUNTION===========================
+   if(youCounter === 1){
+    playAgainOptions();
+  }else if(robotinCounter === 1){
+    playAgainOptions();
   }
+}
+
+function playAgainOptions(){
+  var playAgainBottonContainer = $("<div>");
+  
+  $(".play-again-options").on('click', function(){
+
+    console.log($(this).attr('data-name'));
+    if($(this).attr('data-name') === "again"){
+ alert("Again")
+    }else{
+    console.log($(this).attr('data-name'));
+     alert("home");
+    }
+  })
 }
 })
 
